@@ -1,2 +1,2 @@
 # Tetlis-by-pureJS
-Tetliscreated by pure JavaScript
+Tetlis created by pure JavaScript
