@@ -80,8 +80,6 @@ setInterval(function () {
   }
 }, 1000);
 
-/* ------ ここから下は関数の宣言部分 ------ */
-
 function loadTable() {
   cells = [];
   var td_array = document.getElementsByTagName("td");
