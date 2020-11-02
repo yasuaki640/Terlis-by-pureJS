@@ -2,12 +2,12 @@
 // キーボードイベントを監視する
 document.addEventListener("keydown", onKeyDown);
 
-var count = 0;
+let count = 0;
 
-var cells;
+let cells;
 
 // ブロックのパターン
-var blocks = {
+let blocks = {
   i: {
     class: "i",
     pattern: [
@@ -64,8 +64,8 @@ setInterval(function () {
   document.getElementById("hello_text").textContent = "テトリス作成で学ぶJavaScript   " + count + "秒経過";
   // ブロックが積み上がり切っていないかのチェック
   /*
-  for (var row = 0; row < 2; row++) {
-    for (var col = 0; col < 10; col++) {
+  for (let row = 0; row < 2; row++) {
+    for (let col = 0; col < 10; col++) {
       if (cells[row][col].className !== "" && ) {
         alert("game over");
       }
@@ -82,11 +82,11 @@ setInterval(function () {
 
 function loadTable() {
   cells = [];
-  var td_array = document.getElementsByTagName("td");
-  var index = 0;
-  for (var row = 0; row < 20; row++) {
+  let td_array = document.getElementsByTagName("td");
+  let index = 0;
+  for (let row = 0; row < 20; row++) {
     cells[row] = [];
-    for (var col = 0; col < 10; col++) {
+    for (let col = 0; col < 10; col++) {
       cells[row][col] = td_array[index];
       index++;
     }
@@ -96,15 +96,15 @@ function loadTable() {
 
 function fallBlocks() {
   // 1. 底についていないか？
-  for (var col = 0; col < 10; col++) {
+  for (let col = 0; col < 10; col++) {
     if (cells[19][col].blockNum === fallingBlockNum) {
       isFalling = false;
       return; // 一番下の行にブロックがいるので落とさない
     }
   }
   // 2. 1マス下に別のブロックがないか？
-  for (var row = 18; row >= 0; row--) {
-    for (var col = 0; col < 10; col++) {
+  for (let row = 18; row >= 0; row--) {
+    for (let col = 0; col < 10; col++) {
       if (cells[row][col].blockNum === fallingBlockNum) {
         if (cells[row + 1][col].className !== "" && cells[row + 1][col].blockNum !== fallingBlockNum){
           isFalling = false;
@@ -114,8 +114,8 @@ function fallBlocks() {
     }
   }
   // 下から二番目の行から繰り返しクラスを下げていく
-  for (var row = 18; row >= 0; row--) {
-    for (var col = 0; col < 10; col++) {
+  for (let row = 18; row >= 0; row--) {
+    for (let col = 0; col < 10; col++) {
       if (cells[row][col].blockNum === fallingBlockNum) {
         cells[row + 1][col].className = cells[row][col].className;
         cells[row + 1][col].blockNum = cells[row][col].blockNum;
@@ -126,7 +126,7 @@ function fallBlocks() {
   }
 }
 
-var isFalling = false;
+let isFalling = false;
 function hasFallingBlock() {
   // 落下中のブロックがあるか確認する
   return isFalling;
@@ -134,21 +134,21 @@ function hasFallingBlock() {
 
 function deleteRow() {
   // そろっている行を消す
-  for (var row = 19; row >= 0; row--) {
-    var canDelete = true;
-    for (var col = 0; col < 10; col++) {
+  for (let row = 19; row >= 0; row--) {
+    let canDelete = true;
+    for (let col = 0; col < 10; col++) {
       if (cells[row][col].className === "") {
         canDelete = false;
       }
     }
     if (canDelete) {
       // 1行消す
-      for (var col = 0; col < 10; col++) {
+      for (let col = 0; col < 10; col++) {
         cells[row][col].className = "";
       }
       // 上の行のブロックをすべて1マス落とす
-      for (var downRow = row - 1; downRow >= 0; downRow--) {
-        for (var col = 0; col < 10; col++) {
+      for (let downRow = row - 1; downRow >= 0; downRow--) {
+        for (let col = 0; col < 10; col++) {
           cells[downRow + 1][col].className = cells[downRow][col].className;
           cells[downRow + 1][col].blockNum = cells[downRow][col].blockNum;
           cells[downRow][col].className = "";
@@ -159,18 +159,18 @@ function deleteRow() {
   }
 }
 
-var fallingBlockNum = 0;
+let fallingBlockNum = 0;
 function generateBlock() {
   // ランダムにブロックを生成する
   // 1. ブロックパターンからランダムに一つパターンを選ぶ
-  var keys = Object.keys(blocks);
-  var nextBlockKey = keys[Math.floor(Math.random() * keys.length)];
-  var nextBlock = blocks[nextBlockKey];
-  var nextFallingBlockNum = fallingBlockNum + 1;
+  let keys = Object.keys(blocks);
+  let nextBlockKey = keys[Math.floor(Math.random() * keys.length)];
+  let nextBlock = blocks[nextBlockKey];
+  let nextFallingBlockNum = fallingBlockNum + 1;
   // 2. 選んだパターンをもとにブロックを配置する
-  var pattern = nextBlock.pattern;
-  for (var row = 0; row < pattern.length; row++) {
-    for (var col = 0; col < pattern[row].length; col++) {
+  let pattern = nextBlock.pattern;
+  for (let row = 0; row < pattern.length; row++) {
+    for (let col = 0; col < pattern[row].length; col++) {
       if (pattern[row][col]) {
         cells[row][col + 3].className = nextBlock.class;
         cells[row][col + 3].blockNum = nextFallingBlockNum;
@@ -195,14 +195,14 @@ function onKeyDown(event) {
 
 function moveRight() {
   // 1. 右壁についていないか？
-  for (var row = 19; row >= 0; row--) {
+  for (let row = 19; row >= 0; row--) {
     if (cells[row][9].blockNum === fallingBlockNum) {
       return; // 一番左の列はいけないので動かない
     }
   }
   // 2. 1マス右に別のブロックがないか？
-  for (var row = 19; row >= 0; row--) {
-    for (var col = 0; col < 10; col++) {
+  for (let row = 19; row >= 0; row--) {
+    for (let col = 0; col < 10; col++) {
       if (cells[row][col].blockNum === fallingBlockNum) {
         if (cells[row][col + 1].className !== "" && cells[row][col + 1].blockNum !== fallingBlockNum){
           return; // 一つ右のマスにブロックがいるので落とさない
@@ -211,8 +211,8 @@ function moveRight() {
     }
 　}
   // ブロックを右に移動させる
-  for (var row = 0; row < 20; row++) {
-    for (var col = 9; col >= 0; col--) {
+  for (let row = 0; row < 20; row++) {
+    for (let col = 9; col >= 0; col--) {
       if (cells[row][col].blockNum === fallingBlockNum) {
         cells[row][col + 1].className = cells[row][col].className;
         cells[row][col + 1].blockNum = cells[row][col].blockNum;
@@ -225,14 +225,14 @@ function moveRight() {
 
 function moveLeft() {
   //  左壁についていないか？
-  for (var row = 19; row >= 0; row--) {
+  for (let row = 19; row >= 0; row--) {
     if (cells[row][0].blockNum === fallingBlockNum) {
       return; // 一番左の列はいけないので動かない
     }
   }
   //  1マス左に別のブロックがないか？
-  for (var row = 19; row >= 0; row--) {
-    for (var col = 0; col < 10; col++) {
+  for (let row = 19; row >= 0; row--) {
+    for (let col = 0; col < 10; col++) {
       if (cells[row][col].blockNum === fallingBlockNum) {
         if (cells[row][col - 1].className !== "" && cells[row][col - 1].blockNum !== fallingBlockNum){
           return; // 一つ左のマスにブロックがいるので落とさない
@@ -241,8 +241,8 @@ function moveLeft() {
     }
   }
   // ブロックを左に移動させる
-  for (var row = 0; row < 20; row++) {
-    for (var col = 0; col < 10; col++) {
+  for (let row = 0; row < 20; row++) {
+    for (let col = 0; col < 10; col++) {
       if (cells[row][col].blockNum === fallingBlockNum) {
         cells[row][col - 1].className = cells[row][col].className;
         cells[row][col - 1].blockNum = cells[row][col].blockNum;
@@ -254,8 +254,8 @@ function moveLeft() {
 }
 
 function rotateRight(){
-  for (var row = 0; row < 20; row++) {
-    for (var col = 0; col < 10; col++) {
+  for (let row = 0; row < 20; row++) {
+    for (let col = 0; col < 10; col++) {
       if (cells[row][col].blockNum === fallingBlockNum) {
         cells[col - 1][row].className = cells[row][col].className;
         cells[col - 1][row].blockNum = cells[row][col].blockNum;
