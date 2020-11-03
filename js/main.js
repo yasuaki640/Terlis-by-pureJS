@@ -185,13 +185,21 @@ function generateBlock() {
 
 // キー入力によってそれぞれの関数を呼び出す
 function onKeyDown(event) {
-    if (event.code === "ArrowLeft") {
-        moveLeft();
-    } else if (event.code === "ArrowRight") {
-        moveRight();
-    } /*else if (event.keyCode === 38) {
-    rotateRight();
-  } */
+    const funcs = {
+        "ArrowLeft": function () {
+            moveLeft()
+        },
+        "ArrowRight": function () {
+            moveRight()
+        },
+        "KeyF": function () {
+          rotateRight()
+        }
+    };
+
+    if (event.code != null) {
+        funcs[event.code]();
+    }
 }
 
 function moveRight() {
