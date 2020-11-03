@@ -1,11 +1,10 @@
 const COLS = 10, ROWS = 20;
+let count = 0;
+let cells;
 
 // キーボードイベントを監視する
 document.addEventListener("keydown", onKeyDown);
 
-let count = 0;
-
-let cells;
 
 // ブロックのパターン
 let blocks = {
