@@ -185,9 +185,9 @@ function generateBlock() {
 
 // キー入力によってそれぞれの関数を呼び出す
 function onKeyDown(event) {
-    if (event.keyCode === 37) {
+    if (event.code === "ArrowLeft") {
         moveLeft();
-    } else if (event.keyCode === 39) {
+    } else if (event.code === "ArrowRight") {
         moveRight();
     } /*else if (event.keyCode === 38) {
     rotateRight();
