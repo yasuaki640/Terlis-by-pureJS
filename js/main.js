@@ -193,6 +193,9 @@ function onKeyDown(event) {
         "ArrowRight": function () {
             moveRight()
         },
+        "ArrowDown": function () {
+            fallBlocks()
+        },
         "KeyF": function () {
             rotateRight()
         }
