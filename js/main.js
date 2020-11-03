@@ -84,9 +84,9 @@ function loadTable() {
     cells = [];
     let td_array = document.getElementsByTagName("td");
     let index = 0;
-    for (let row = 0; row < 20; row++) {
+    for (let row = 0; row < ROWS; row++) {
         cells[row] = [];
-        for (let col = 0; col < 10; col++) {
+        for (let col = 0; col < COLS; col++) {
             cells[row][col] = td_array[index];
             index++;
         }
@@ -103,8 +103,8 @@ function fallBlocks() {
         }
     }
     // 2. 1マス下に別のブロックがないか？
-    for (let row = 18; row >= 0; row--) {
-        for (let col = 0; col < 10; col++) {
+    for (let row = ROWS - 2; row >= 0; row--) {
+        for (let col = 0; col < COLS; col++) {
             if (cells[row][col].blockNum === fallingBlockNum) {
                 if (cells[row + 1][col].className !== "" && cells[row + 1][col].blockNum !== fallingBlockNum) {
                     isFalling = false;
@@ -114,8 +114,8 @@ function fallBlocks() {
         }
     }
     // 下から二番目の行から繰り返しクラスを下げていく
-    for (let row = 18; row >= 0; row--) {
-        for (let col = 0; col < 10; col++) {
+    for (let row = ROWS - 2; row >= 0; row--) {
+        for (let col = 0; col < COLS; col++) {
             if (cells[row][col].blockNum === fallingBlockNum) {
                 cells[row + 1][col].className = cells[row][col].className;
                 cells[row + 1][col].blockNum = cells[row][col].blockNum;
@@ -206,7 +206,7 @@ function onKeyDown(event) {
 function moveRight() {
     // 1. 右壁についていないか？
     for (let row = ROWS - 1; row >= 0; row--) {
-        if (cells[row][9].blockNum === fallingBlockNum) {
+        if (cells[row][COLS - 1].blockNum === fallingBlockNum) {
             return; // 一番左の列はいけないので動かない
         }
     }
