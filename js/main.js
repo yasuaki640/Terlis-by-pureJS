@@ -193,7 +193,7 @@ function onKeyDown(event) {
             moveRight()
         },
         "KeyF": function () {
-          rotateRight()
+            rotateRight()
         }
     };
 
