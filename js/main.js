@@ -1,3 +1,5 @@
+const COLS = 10, ROWS = 20;
+
 // キーボードイベントを監視する
 document.addEventListener("keydown", onKeyDown);
 
@@ -204,14 +206,14 @@ function onKeyDown(event) {
 
 function moveRight() {
     // 1. 右壁についていないか？
-    for (let row = 19; row >= 0; row--) {
+    for (let row = ROWS - 1; row >= 0; row--) {
         if (cells[row][9].blockNum === fallingBlockNum) {
             return; // 一番左の列はいけないので動かない
         }
     }
     // 2. 1マス右に別のブロックがないか？
-    for (let row = 19; row >= 0; row--) {
-        for (let col = 0; col < 10; col++) {
+    for (let row = ROWS - 1; row >= 0; row--) {
+        for (let col = 0; col < COLS; col++) {
             if (cells[row][col].blockNum === fallingBlockNum) {
                 if (cells[row][col + 1].className !== "" && cells[row][col + 1].blockNum !== fallingBlockNum) {
                     return; // 一つ右のマスにブロックがいるので落とさない
@@ -220,8 +222,8 @@ function moveRight() {
         }
     }
     // ブロックを右に移動させる
-    for (let row = 0; row < 20; row++) {
-        for (let col = 9; col >= 0; col--) {
+    for (let row = 0; row < ROWS; row++) {
+        for (let col = COLS - 1; col >= 0; col--) {
             if (cells[row][col].blockNum === fallingBlockNum) {
                 cells[row][col + 1].className = cells[row][col].className;
                 cells[row][col + 1].blockNum = cells[row][col].blockNum;
@@ -234,13 +236,13 @@ function moveRight() {
 
 function moveLeft() {
     //  左壁についていないか？
-    for (let row = 19; row >= 0; row--) {
+    for (let row = ROWS - 1; row >= 0; row--) {
         if (cells[row][0].blockNum === fallingBlockNum) {
             return; // 一番左の列はいけないので動かない
         }
     }
     //  1マス左に別のブロックがないか？
-    for (let row = 19; row >= 0; row--) {
+    for (let row = ROWS - 1; row >= 0; row--) {
         for (let col = 0; col < 10; col++) {
             if (cells[row][col].blockNum === fallingBlockNum) {
                 if (cells[row][col - 1].className !== "" && cells[row][col - 1].blockNum !== fallingBlockNum) {
@@ -250,8 +252,8 @@ function moveLeft() {
         }
     }
     // ブロックを左に移動させる
-    for (let row = 0; row < 20; row++) {
-        for (let col = 0; col < 10; col++) {
+    for (let row = 0; row < ROWS; row++) {
+        for (let col = 0; col < COLS; col++) {
             if (cells[row][col].blockNum === fallingBlockNum) {
                 cells[row][col - 1].className = cells[row][col].className;
                 cells[row][col - 1].blockNum = cells[row][col].blockNum;
@@ -263,8 +265,8 @@ function moveLeft() {
 }
 
 function rotateRight() {
-    for (let row = 0; row < 20; row++) {
-        for (let col = 0; col < 10; col++) {
+    for (let row = 0; row < ROWS; row++) {
+        for (let col = 0; col < COLS; col++) {
             if (cells[row][col].blockNum === fallingBlockNum) {
                 cells[col - 1][row].className = cells[row][col].className;
                 cells[col - 1][row].blockNum = cells[row][col].blockNum;
