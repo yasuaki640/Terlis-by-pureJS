@@ -62,16 +62,7 @@ loadTable();
 setInterval(function () {
     count++;
     document.getElementById("hello_text").textContent = "テトリス作成で学ぶJavaScript   " + count + "秒経過";
-    // ブロックが積み上がり切っていないかのチェック
-    /*
-    for (let row = 0; row < 2; row++) {
-      for (let col = 0; col < 10; col++) {
-        if (cells[row][col].className !== "" && ) {
-          alert("game over");
-        }
-      }
-    }
-    */
+
     if (hasFallingBlock()) { // 落下中のブロックがあるか確認する
         fallBlocks();// あればブロックを落とす
     } else { // なければ
@@ -170,11 +161,16 @@ function generateBlock() {
     let nextBlockKey = keys[Math.floor(Math.random() * keys.length)];
     let nextBlock = blocks[nextBlockKey];
     let nextFallingBlockNum = fallingBlockNum + 1;
-    // 2. 選んだパターンをもとにブロックを配置する
     let pattern = nextBlock.pattern;
+
     for (let row = 0; row < pattern.length; row++) {
         for (let col = 0; col < pattern[row].length; col++) {
-            if (pattern[row][col]) {
+            if (pattern[row][col] === 1
+                && cells[row][col + 3].className !== "") {
+                alert("game over");
+                return;
+            } else if (pattern[row][col] === 1) {
+                // 2. 選んだパターンをもとにブロックを配置する
                 cells[row][col + 3].className = nextBlock.class;
                 cells[row][col + 3].blockNum = nextFallingBlockNum;
             }
