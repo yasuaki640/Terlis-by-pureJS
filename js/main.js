@@ -97,7 +97,8 @@ function fallBlocks() {
     for (let row = ROWS - 2; row >= 0; row--) {
         for (let col = 0; col < COLS; col++) {
             if (cells[row][col].blockNum === fallingBlockNum) {
-                if (cells[row + 1][col].className !== "" && cells[row + 1][col].blockNum !== fallingBlockNum) {
+                if (cells[row + 1][col].className !== ""
+                    && cells[row + 1][col].blockNum !== fallingBlockNum) {
                     isFalling = false;
                     return; // 一つ下のマスにブロックがいるので落とさない
                 }
@@ -214,7 +215,8 @@ function moveRight() {
     for (let row = ROWS - 1; row >= 0; row--) {
         for (let col = 0; col < COLS; col++) {
             if (cells[row][col].blockNum === fallingBlockNum) {
-                if (cells[row][col + 1].className !== "" && cells[row][col + 1].blockNum !== fallingBlockNum) {
+                if (cells[row][col + 1].className !== ""
+                    && cells[row][col + 1].blockNum !== fallingBlockNum) {
                     return; // 一つ右のマスにブロックがいるので落とさない
                 }
             }
@@ -244,7 +246,8 @@ function moveLeft() {
     for (let row = ROWS - 1; row >= 0; row--) {
         for (let col = 0; col < 10; col++) {
             if (cells[row][col].blockNum === fallingBlockNum) {
-                if (cells[row][col - 1].className !== "" && cells[row][col - 1].blockNum !== fallingBlockNum) {
+                if (cells[row][col - 1].className !== ""
+                    && cells[row][col - 1].blockNum !== fallingBlockNum) {
                     return; // 一つ左のマスにブロックがいるので落とさない
                 }
             }
