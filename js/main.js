@@ -117,10 +117,7 @@ function fallBlocks() {
     for (let row = ROWS - 2; row >= 0; row--) {
         for (let col = 0; col < COLS; col++) {
             if (cells[row][col].blockNum === fallingBlockNum) {
-                cells[row + 1][col].className = cells[row][col].className;
-                cells[row + 1][col].blockNum = cells[row][col].blockNum;
-                cells[row][col].className = "";
-                cells[row][col].blockNum = null;
+                dropLineOfBlocks(row, col);
             }
         }
     }
@@ -150,14 +147,18 @@ function deleteRow() {
             // 上の行のブロックをすべて1マス落とす
             for (let downRow = row - 1; downRow >= 0; downRow--) {
                 for (let col = 0; col < 10; col++) {
-                    cells[downRow + 1][col].className = cells[downRow][col].className;
-                    cells[downRow + 1][col].blockNum = cells[downRow][col].blockNum;
-                    cells[downRow][col].className = "";
-                    cells[downRow][col].blockNum = null;
+                    dropLineOfBlocks(downRow, col);
                 }
             }
         }
     }
+}
+
+function dropLineOfBlocks(row, col) {
+    cells[row + 1][col].className = cells[row][col].className;
+    cells[row + 1][col].blockNum = cells[row][col].blockNum;
+    cells[row][col].className = "";
+    cells[row][col].blockNum = null;
 }
 
 let fallingBlockNum = 0;
