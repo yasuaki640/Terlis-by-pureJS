@@ -1,6 +1,7 @@
 const COLS = 10, ROWS = 20;
 let count = 0;
 let cells;
+let isFalling = false;
 
 // キーボードイベントを監視する
 document.addEventListener("keydown", onKeyDown);
@@ -115,7 +116,6 @@ function fallBlocks() {
     }
 }
 
-let isFalling = false;
 
 function hasFallingBlock() {
     // 落下中のブロックがあるか確認する
