@@ -166,15 +166,16 @@ function generateBlock() {
 
     for (let row = 0; row < pattern.length; row++) {
         for (let col = 0; col < pattern[row].length; col++) {
-            if (pattern[row][col] === 1
-                && cells[row][col + 3].className !== "") {
+            if (pattern[row][col] === 0) {
+                continue;
+            } else if (cells[row][col + 3].className !== "") {
                 alert("game over");
                 return;
-            } else if (pattern[row][col] === 1) {
-                // 2. 選んだパターンをもとにブロックを配置する
-                cells[row][col + 3].className = nextBlock.class;
-                cells[row][col + 3].blockNum = nextFallingBlockNum;
             }
+            // 2. 選んだパターンをもとにブロックを配置する
+            cells[row][col + 3].className = nextBlock.class;
+            cells[row][col + 3].blockNum = nextFallingBlockNum;
+
         }
     }
     // 3. 落下中のブロックがあるとする
