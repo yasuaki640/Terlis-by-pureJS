@@ -2,6 +2,7 @@ const COLS = 10, ROWS = 20;
 let count = 0;
 let cells;
 let isFalling = false;
+let fallingBlockKey;
 
 // キーボードイベントを監視する
 document.addEventListener("keydown", onKeyDown);
@@ -181,6 +182,7 @@ function generateBlock() {
     // 3. 落下中のブロックがあるとする
     isFalling = true;
     fallingBlockNum = nextFallingBlockNum;
+    fallingBlockKey = nextBlockKey;
 }
 
 // キー入力によってそれぞれの関数を呼び出す
