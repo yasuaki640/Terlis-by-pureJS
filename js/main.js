@@ -270,14 +270,4 @@ function moveLeft() {
 }
 
 function rotateRight() {
-    for (let row = 0; row < ROWS; row++) {
-        for (let col = 0; col < COLS; col++) {
-            if (cells[row][col].blockNum === fallingBlockNum) {
-                cells[col - 1][row].className = cells[row][col].className;
-                cells[col - 1][row].blockNum = cells[row][col].blockNum;
-                cells[row][col].className = "";
-                cells[row][col].blockNum = null;
-            }
-        }
-    }
 }
