@@ -182,7 +182,7 @@ function generateBlock() {
     // 3. 落下中のブロックがあるとする
     isFalling = true;
     fallingBlockNum = nextFallingBlockNum;
-    fallingBlockKey = nextBlockKey;
+    this.fallingBlockKey = nextBlockKey;
 }
 
 // キー入力によってそれぞれの関数を呼び出す
