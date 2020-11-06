@@ -270,4 +270,5 @@ function moveLeft() {
 }
 
 function rotateRight() {
+    fallingBlockKey = this.fallingBlockKey;
 }
