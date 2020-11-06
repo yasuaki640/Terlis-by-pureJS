@@ -271,4 +271,10 @@ function moveLeft() {
 
 function rotateRight() {
     fallingBlockKey = this.fallingBlockKey;
+    let tmpCells = [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+    ];
 }
