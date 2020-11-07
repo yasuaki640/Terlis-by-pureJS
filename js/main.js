@@ -3,6 +3,10 @@ let count = 0;
 let cells;
 let isFalling = false;
 let fallingBlockKey;
+const UPWARD = Symbol("upward block state");
+const RIGHTWARD = Symbol("rightward block state");
+const DOWNWARD = Symbol("downward block state");
+const LEFTWARD = Symbol("leftward block state");
 
 // キーボードイベントを監視する
 document.addEventListener("keydown", onKeyDown);
