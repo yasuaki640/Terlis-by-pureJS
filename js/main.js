@@ -13,49 +13,65 @@ let blocks = {
     i: {
         class: "i",
         pattern: [
-            [1, 1, 1, 1]
+            [0, 0, 0, 0],
+            [1, 1, 1, 1],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
         ]
     },
     o: {
         class: "o",
         pattern: [
-            [1, 1],
-            [1, 1]
+            [0, 0, 0, 0],
+            [0, 1, 1, 0],
+            [0, 1, 1, 0],
+            [0, 0, 0, 0]
         ]
     },
     t: {
         class: "t",
         pattern: [
-            [0, 1, 0],
-            [1, 1, 1]
+
+            [0, 0, 0, 0],
+            [0, 1, 0, 0],
+            [1, 1, 1, 0],
+            [0, 0, 0, 0]
         ]
     },
     s: {
         class: "s",
         pattern: [
-            [0, 1, 1],
-            [1, 1, 0]
+            [0, 0, 0, 0],
+            [0, 1, 1, 0],
+            [1, 1, 0, 0],
+            [0, 0, 0, 0]
         ]
     },
     z: {
         class: "z",
         pattern: [
-            [1, 1, 0],
-            [0, 1, 1]
+            [0, 0, 0, 0],
+            [1, 1, 0, 0],
+            [0, 1, 1, 0],
+            [0, 0, 0, 0]
         ]
     },
     j: {
         class: "j",
         pattern: [
-            [1, 0, 0],
-            [1, 1, 1]
+            [0, 0, 0, 0],
+            [1, 0, 0, 0],
+            [1, 1, 1, 0],
+            [0, 0, 0, 0]
         ]
     },
     l: {
         class: "l",
         pattern: [
-            [0, 0, 1],
-            [1, 1, 1]
+            [0, 0, 0, 0],
+            [0, 0, 1, 0],
+            [1, 1, 1, 0],
+            [0, 0, 0, 0]
         ]
     }
 };
@@ -165,17 +181,18 @@ function generateBlock() {
     let nextFallingBlockNum = fallingBlockNum + 1;
     let pattern = nextBlock.pattern;
 
-    for (let row = 0; row < pattern.length; row++) {
+    // ATTENTION kuso code
+    for (let row = 1; row < pattern.length - 1; row++) {
         for (let col = 0; col < pattern[row].length; col++) {
             if (pattern[row][col] === 0) {
                 continue;
-            } else if (cells[row][col + 3].className !== "") {
+            } else if (cells[row - 1][col + 3].className !== "") {
                 alert("game over");
                 return;
             }
             // 2. 選んだパターンをもとにブロックを配置する
-            cells[row][col + 3].className = nextBlock.class;
-            cells[row][col + 3].blockNum = nextFallingBlockNum;
+            cells[row - 1][col + 3].className = nextBlock.class;
+            cells[row - 1][col + 3].blockNum = nextFallingBlockNum;
 
         }
     }
