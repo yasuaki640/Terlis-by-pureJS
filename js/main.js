@@ -301,4 +301,17 @@ function rotateRight() {
         rotated = rotate90degToRight(rotated);
     }
 
+    //4*4行列の中で最も左上にくるブロックの座標を得る。
+    let x, y;
+    searchPatternStartPoint:
+        for (let row = 0; row < rotated.length; row++) {
+            for (let col = 0; col < rotated[row].length; col++) {
+                if (rotated[row][col] === 1) {
+                    y = row;
+                    x = col;
+                    break searchPatternStartPoint;
+                }
+            }
+        }
+
 }
