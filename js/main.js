@@ -328,4 +328,8 @@ function rotateRight() {
                 }
             }
         }
+
+    //4*4のマスの(0,0)をフィールド上の座標に変換する。
+    let relativeX = X - x;
+    let relativeY = Y - y;
 }
