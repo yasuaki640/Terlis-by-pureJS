@@ -296,7 +296,8 @@ function rotateRight() {
     let rotated = blocks[fallingBlockKey].pattern;
 
     const rotate90degToRight = pattern => pattern[0].map((_, c) => pattern.map(r => r[c]).reverse());
-    for (let i = 0; i < blockDirection; i++) {
+    //パターンをあらかじめ90度右に回転しておく
+    for (let i = 0; i < blockDirection + 1; i++) {
         rotated = rotate90degToRight(rotated);
     }
 
