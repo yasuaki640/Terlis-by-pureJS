@@ -294,4 +294,10 @@ function moveLeft() {
 function rotateRight() {
     fallingBlockKey = this.fallingBlockKey;
     let rotated = blocks[fallingBlockKey].pattern;
+
+    const rotate90degToRight = pattern => pattern[0].map((_, c) => pattern.map(r => r[c]).reverse());
+    for (let i = 0; i < blockDirection; i++) {
+        rotated = rotate90degToRight(rotated);
+    }
+
 }
