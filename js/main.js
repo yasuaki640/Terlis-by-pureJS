@@ -293,20 +293,21 @@ function moveLeft() {
 
 function rotateRight() {
     fallingBlockKey = this.fallingBlockKey;
-    let rotated = blocks[fallingBlockKey].pattern;
+    let fallingBlockPattern = blocks[fallingBlockKey].pattern;
+    let currentState = fallingBlockPattern;
 
     const rotate90degToRight = pattern => pattern[0].map((_, c) => pattern.map(r => r[c]).reverse());
-    //パターンをあらかじめ90度右に回転しておく
-    for (let i = 0; i < blockDirection + 1; i++) {
-        rotated = rotate90degToRight(rotated);
+    for (let i = 0; i < blockDirection; i++) {
+        currentState = rotate90degToRight(currentState);
     }
+    let rotated = rotate90degToRight(currentState);
 
     //4*4行列の中で最も左上にくるブロックの座標を得る。
     let x, y;
     searchPatternStartPoint:
-        for (let row = 0; row < rotated.length; row++) {
-            for (let col = 0; col < rotated[row].length; col++) {
-                if (rotated[row][col] === 1) {
+        for (let row = 0; row < currentState.length; row++) {
+            for (let col = 0; col < currentState[row].length; col++) {
+                if (currentState[row][col] === 1) {
                     y = row;
                     x = col;
                     break searchPatternStartPoint;
