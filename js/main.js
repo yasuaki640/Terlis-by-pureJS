@@ -314,4 +314,17 @@ function rotateRight() {
             }
         }
 
+    //落ちているブロック位置を探索する
+    let X, Y;
+    searchFallingBlockStartPoint:
+        for (let row = 0; row < ROWS; row++) {
+            for (let col = 0; col < COLS; col++) {
+                if (cells[row][col].blockNum !== undefined
+                    && cells[row][col].blockNum === fallingBlockNum) {
+                    Y = row;
+                    X = col;
+                    break searchFallingBlockStartPoint;
+                }
+            }
+        }
 }
