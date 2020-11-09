@@ -1,4 +1,5 @@
 const COLS = 10, ROWS = 20;
+const PATTERN_COLS = 4, PATTERN_ROWS = 4;
 let count = 0;
 let cells;
 let isFalling = false;
