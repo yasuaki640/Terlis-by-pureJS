@@ -292,7 +292,7 @@ function moveLeft() {
     }
 }
 
-function searchUpperLeftBlockPoint(currentState) {
+function searchBlockPoint(currentState) {
     let x, y;
     for (let row = 0; row < currentState.length; row++) {
         for (let col = 0; col < currentState[row].length; col++) {
@@ -305,7 +305,7 @@ function searchUpperLeftBlockPoint(currentState) {
     }
 }
 
-function searchFallingBlockUpperRightPoint() {
+function searchFallingBlockPoint() {
     let X, Y;
     for (let row = 0; row < ROWS; row++) {
         for (let col = 0; col < COLS; col++) {
@@ -322,30 +322,30 @@ function searchFallingBlockUpperRightPoint() {
 function rotateRight() {
     fallingBlockKey = this.fallingBlockKey;
     let fallingBlockPattern = blocks[fallingBlockKey].pattern;
-    let currentState = fallingBlockPattern;
+    let currentBlockState = fallingBlockPattern;
 
     const rotate90degToRight = pattern => pattern[0].map((_, c) => pattern.map(r => r[c]).reverse());
     for (let i = 0; i < blockDirection; i++) {
-        currentState = rotate90degToRight(currentState);
+        currentBlockState = rotate90degToRight(currentBlockState);
     }
-    let rotated = rotate90degToRight(currentState);
+    let rotated = rotate90degToRight(currentBlockState);
 
     //4*4行列の中で最も左上にくるブロックの座標を得る。
-    let upperLeftBlockX, upperLeftBlockY;
-    const upperLeftBlockPoint = searchUpperLeftBlockPoint(currentState);
-    upperLeftBlockY = upperLeftBlockPoint.y;
-    upperLeftBlockX = upperLeftBlockPoint.x;
+    let BlockX, BlockY;
+    const BlockPoint = searchBlockPoint(currentBlockState);
+    BlockY = BlockPoint.y;
+    BlockX = BlockPoint.x;
 
 
     //落ちているブロック位置を探索する
-    let upperLeftFallingBlockX, upperLeftFallingBlockY;
-    const fallingBlockUpperRightPoint = searchFallingBlockUpperRightPoint();
-    upperLeftFallingBlockY = fallingBlockUpperRightPoint.Y;
-    upperLeftFallingBlockX = fallingBlockUpperRightPoint.X;
+    let FallingBlockX, FallingBlockY;
+    const fallingBlockPoint = searchFallingBlockPoint();
+    FallingBlockY = fallingBlockPoint.Y;
+    FallingBlockX = fallingBlockPoint.X;
 
     //4*4のマスの(0,0)をフィールド上の座標に変換する。
-    let relativeX = upperLeftFallingBlockX - upperLeftBlockX;
-    let relativeY = upperLeftFallingBlockY - upperLeftBlockY;
+    let relativeX = FallingBlockX - BlockX;
+    let relativeY = FallingBlockY - BlockY;
 
     //4*4の配列に壁やほかのブロックなどの障害物の情報を入れていく
     for (let row = 0; row < PATTERN_ROWS; row++) {
