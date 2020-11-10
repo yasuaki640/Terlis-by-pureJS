@@ -338,14 +338,14 @@ function rotateRight() {
 
 
     //落ちているブロック位置を探索する
-    let upperLeftFallingBlockX, Y;
+    let upperLeftFallingBlockX, upperLeftFallingBlockY;
     const fallingBlockUpperRightPoint = searchFallingBlockUpperRightPoint();
-    Y = fallingBlockUpperRightPoint.Y;
+    upperLeftFallingBlockY = fallingBlockUpperRightPoint.Y;
     upperLeftFallingBlockX = fallingBlockUpperRightPoint.X;
 
     //4*4のマスの(0,0)をフィールド上の座標に変換する。
     let relativeX = upperLeftFallingBlockX - upperLeftBlockX;
-    let relativeY = Y - upperLeftBlockY;
+    let relativeY = upperLeftFallingBlockY - upperLeftBlockY;
 
     //4*4の配列に壁やほかのブロックなどの障害物の情報を入れていく
     for (let row = 0; row < PATTERN_ROWS; row++) {
