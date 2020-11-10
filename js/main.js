@@ -292,6 +292,20 @@ function moveLeft() {
     }
 }
 
+function getUpperRightBlockPoint(currentState, y, x) {
+    searchPatternStartPoint:
+        for (let row = 0; row < currentState.length; row++) {
+            for (let col = 0; col < currentState[row].length; col++) {
+                if (currentState[row][col] === 1) {
+                    y = row;
+                    x = col;
+                    break searchPatternStartPoint;
+                }
+            }
+        }
+    return {y, x};
+}
+
 function rotateRight() {
     fallingBlockKey = this.fallingBlockKey;
     let fallingBlockPattern = blocks[fallingBlockKey].pattern;
@@ -305,16 +319,11 @@ function rotateRight() {
 
     //4*4行列の中で最も左上にくるブロックの座標を得る。
     let x, y;
-    searchPatternStartPoint:
-        for (let row = 0; row < currentState.length; row++) {
-            for (let col = 0; col < currentState[row].length; col++) {
-                if (currentState[row][col] === 1) {
-                    y = row;
-                    x = col;
-                    break searchPatternStartPoint;
-                }
-            }
-        }
+    const __UpperRightBlockPoint = getUpperRightBlockPoint(currentState, y, x);
+    y = __UpperRightBlockPoint.y;
+    x = __UpperRightBlockPoint.x;
+
+
 
     //落ちているブロック位置を探索する
     let X, Y;
