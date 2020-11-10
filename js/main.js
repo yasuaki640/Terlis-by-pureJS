@@ -292,7 +292,7 @@ function moveLeft() {
     }
 }
 
-function getUpperRightBlockPoint(currentState, y, x) {
+function searchUpperRightBlockPoint(currentState, y, x) {
     searchPatternStartPoint:
         for (let row = 0; row < currentState.length; row++) {
             for (let col = 0; col < currentState[row].length; col++) {
@@ -319,7 +319,7 @@ function rotateRight() {
 
     //4*4行列の中で最も左上にくるブロックの座標を得る。
     let x, y;
-    const __UpperRightBlockPoint = getUpperRightBlockPoint(currentState, y, x);
+    const __UpperRightBlockPoint = searchUpperRightBlockPoint(currentState, y, x);
     y = __UpperRightBlockPoint.y;
     x = __UpperRightBlockPoint.x;
 
