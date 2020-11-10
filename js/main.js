@@ -293,32 +293,28 @@ function moveLeft() {
 }
 
 function searchUpperRightBlockPoint(currentState, y, x) {
-    searchPatternStartPoint:
-        for (let row = 0; row < currentState.length; row++) {
-            for (let col = 0; col < currentState[row].length; col++) {
-                if (currentState[row][col] === 1) {
-                    y = row;
-                    x = col;
-                    break searchPatternStartPoint;
-                }
+    for (let row = 0; row < currentState.length; row++) {
+        for (let col = 0; col < currentState[row].length; col++) {
+            if (currentState[row][col] === 1) {
+                y = row;
+                x = col;
+                return {y, x};
             }
         }
-    return {y, x};
+    }
 }
 
 function searchFallingBlockUpperRightPoint(Y, X) {
-    searchFallingBlockStartPoint:
-        for (let row = 0; row < ROWS; row++) {
-            for (let col = 0; col < COLS; col++) {
-                if (cells[row][col].blockNum !== undefined
-                    && cells[row][col].blockNum === fallingBlockNum) {
-                    Y = row;
-                    X = col;
-                    break searchFallingBlockStartPoint;
-                }
+    for (let row = 0; row < ROWS; row++) {
+        for (let col = 0; col < COLS; col++) {
+            if (cells[row][col].blockNum !== undefined
+                && cells[row][col].blockNum === fallingBlockNum) {
+                Y = row;
+                X = col;
+                return {Y, X};
             }
         }
-    return {Y, X};
+    }
 }
 
 function rotateRight() {
@@ -337,7 +333,6 @@ function rotateRight() {
     const __UpperRightBlockPoint = searchUpperRightBlockPoint(currentState, y, x);
     y = __UpperRightBlockPoint.y;
     x = __UpperRightBlockPoint.x;
-
 
 
     //落ちているブロック位置を探索する
