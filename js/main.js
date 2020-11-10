@@ -305,7 +305,8 @@ function searchUpperLeftBlockPoint(currentState) {
     }
 }
 
-function searchFallingBlockUpperRightPoint(Y, X) {
+function searchFallingBlockUpperRightPoint() {
+    let X, Y
     for (let row = 0; row < ROWS; row++) {
         for (let col = 0; col < COLS; col++) {
             if (cells[row][col].blockNum !== undefined
@@ -338,7 +339,7 @@ function rotateRight() {
 
     //落ちているブロック位置を探索する
     let X, Y;
-    const fallingBlockUpperRightPoint = searchFallingBlockUpperRightPoint(Y, X);
+    const fallingBlockUpperRightPoint = searchFallingBlockUpperRightPoint();
     Y = fallingBlockUpperRightPoint.Y;
     X = fallingBlockUpperRightPoint.X;
 
