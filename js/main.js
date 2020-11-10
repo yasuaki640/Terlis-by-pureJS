@@ -297,9 +297,9 @@ function searchUpperLeftBlockPoint(currentState) {
     for (let row = 0; row < currentState.length; row++) {
         for (let col = 0; col < currentState[row].length; col++) {
             if (currentState[row][col] === 1) {
-                y = row;
                 x = col;
-                return {y, x};
+                y = row;
+                return {x, y};
             }
         }
     }
@@ -311,9 +311,9 @@ function searchFallingBlockUpperRightPoint() {
         for (let col = 0; col < COLS; col++) {
             if (cells[row][col].blockNum !== undefined
                 && cells[row][col].blockNum === fallingBlockNum) {
-                Y = row;
                 X = col;
-                return {Y, X};
+                Y = row;
+                return {X, Y};
             }
         }
     }
