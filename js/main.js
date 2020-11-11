@@ -342,6 +342,10 @@ function rotateRight() {
     //4*4の配列に壁やほかのブロックなどの障害物の情報を入れていく
     for (let row = 0; row < PATTERN_ROWS; row++) {
         for (let col = 0; col < PATTERN_COLS; col++) {
+            //回転対象のブロックを含む4*4の部分配列に
+            //他のブロックや壁外などの情報を詰める
+            if (cells[row][col].blockNum !== undefined) {
+                currentBlockState[row][col] = 1;
             }
         }
     }
