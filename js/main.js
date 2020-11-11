@@ -293,27 +293,25 @@ function moveLeft() {
 }
 
 function searchBlockPoint(currentState) {
-    let x, y;
+    let blockPoint = new Map();
     for (let row = 0; row < currentState.length; row++) {
         for (let col = 0; col < currentState[row].length; col++) {
             if (currentState[row][col] === 1) {
-                x = col;
-                y = row;
-                return {x, y};
+                blockPoint.set(col, row);
+                return blockPoint;
             }
         }
     }
 }
 
 function searchFallingBlockPoint() {
-    let X, Y;
+    let fallingBlockPoint = new Map();
     for (let row = 0; row < ROWS; row++) {
         for (let col = 0; col < COLS; col++) {
             if (cells[row][col].blockNum !== undefined
                 && cells[row][col].blockNum === fallingBlockNum) {
-                X = col;
-                Y = row;
-                return {X, Y};
+                fallingBlockPoint.set(col, row);
+                return fallingBlockPoint;
             }
         }
     }
@@ -331,27 +329,24 @@ function rotateRight() {
     let rotated = rotate90degToRight(currentBlockState);
 
     //4*4行列の中で最も左上にくるブロックの座標を得る。
-    let BlockX, BlockY;
-    const BlockPoint = searchBlockPoint(currentBlockState);
-    BlockY = BlockPoint.y;
-    BlockX = BlockPoint.x;
-
+    let blockPoint = searchBlockPoint(currentBlockState);
 
     //落ちているブロック位置を探索する
-    let FallingBlockX, FallingBlockY;
-    const fallingBlockPoint = searchFallingBlockPoint();
-    FallingBlockY = fallingBlockPoint.Y;
-    FallingBlockX = fallingBlockPoint.X;
+    let fallingBlockPoint = searchFallingBlockPoint();
 
     //4*4のマスの(0,0)をフィールド上の座標に変換する。
-    let targetX = FallingBlockX - BlockX;
-    let targetY = FallingBlockY - BlockY;
-
+    let x = fallingBlockPoint.keys().next().value - blockPoint.keys().next().value;
+    let y = fallingBlockPoint.values().next().value - blockPoint.values().next().value;
+    let pointInField = Map(x, y);
+    
     //4*4の配列に壁やほかのブロックなどの障害物の情報を入れていく
     for (let row = 0; row < PATTERN_ROWS; row++) {
         for (let col = 0; col < PATTERN_COLS; col++) {
             if (cells[row][col].blockNum === undefined) {
                 continue;
+            }
+            if (s + PATTERN_COLS > COLS) {
+
             }
         }
     }
