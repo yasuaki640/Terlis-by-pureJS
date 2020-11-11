@@ -329,15 +329,15 @@ function rotateRight() {
     let rotated = rotate90degToRight(currentBlockState);
 
     //4*4行列の中で最も左上にくるブロックの座標を得る。
-    let blockPoint = searchBlockPoint(currentBlockState);
+    let blockPointMap = searchBlockPoint(currentBlockState);
 
     //落ちているブロック位置を探索する
-    let fallingBlockPoint = searchFallingBlockPoint();
+    let fallingBlockPointMap = searchFallingBlockPoint();
 
     //4*4のマスの(0,0)をフィールド上の座標に変換する。
-    let x = fallingBlockPoint.keys().next().value - blockPoint.keys().next().value;
-    let y = fallingBlockPoint.values().next().value - blockPoint.values().next().value;
-    let pointInField = Map(x, y);
+    let x = fallingBlockPointMap.keys().next().value - blockPointMap.keys().next().value;
+    let y = fallingBlockPointMap.values().next().value - blockPointMap.values().next().value;
+    let pointInFieldMap = Map(x, y);
     
     //4*4の配列に壁やほかのブロックなどの障害物の情報を入れていく
     for (let row = 0; row < PATTERN_ROWS; row++) {
