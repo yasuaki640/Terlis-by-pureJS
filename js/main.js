@@ -346,6 +346,10 @@ function rotateRight() {
             //他のブロックや壁外などの情報を詰める
             if (cells[row][col].blockNum !== undefined) {
                 currentBlockState[row][col] = 1;
+            } else if (col + PATTERN_COLS > COLS) {
+                currentBlockState[row][col] = 2;
+            } else if (row + PATTERN_ROWS > COLS) {
+                currentBlockState[row][col] = 2;
             }
         }
     }
