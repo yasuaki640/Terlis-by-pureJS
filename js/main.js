@@ -338,7 +338,7 @@ function rotateRight() {
     let x = fallingBlockPointMap.keys().next().value - blockPointMap.keys().next().value;
     let y = fallingBlockPointMap.values().next().value - blockPointMap.values().next().value;
     let pointInFieldMap = Map(x, y);
-    
+
     //4*4の配列に壁やほかのブロックなどの障害物の情報を入れていく
     for (let row = 0; row < PATTERN_ROWS; row++) {
         for (let col = 0; col < PATTERN_COLS; col++) {
