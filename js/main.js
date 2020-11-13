@@ -336,7 +336,12 @@ function rotateRight() {
     //4*4のマスの(0,0)をフィールド上の座標に変換する。
     let x = fallingBlockPointMap.keys().next().value - blockPointMap.keys().next().value;
     let y = fallingBlockPointMap.values().next().value - blockPointMap.values().next().value;
-    let pointInFieldMap = Map(x, y);
+    let pointInFieldMap = new Map([[x, y]]);
+
+    let subArrOfFields = [[0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]];
 
     //4*4の配列に壁やほかのブロックなどの障害物の情報を入れていく
     for (let row = 0; row < PATTERN_ROWS; row++) {
