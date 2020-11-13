@@ -317,6 +317,37 @@ function searchFallingBlockPoint() {
     }
 }
 
+function packInfoAroundBlock(x, y) {
+    let subArrOfFields = [[0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]];
+
+    //4*4の配列に壁やほかのブロックなどの障害物の情報を入れていく
+    for (let row = 0; row < PATTERN_ROWS; row++) {
+        for (let col = 0; col < PATTERN_COLS; col++) {
+            //回転対象のブロックを含む4*4の部分配列に
+            //他のブロックや壁外などの情報を詰める
+            let patternX = col + x;
+            let patternY = row + y;
+            // 1 = 落ちているブロック自身
+            // 2 = すでに積みあがったブロック
+            // 3 = フィールドの範囲外であることを示す
+            if (patternX > COLS - 1 || patternY > ROWS - 1) {
+                subArrOfFields[row][col] = 3;
+            } else if (cells[patternY][patternX].blockNum !== undefined
+                && cells[patternY][patternX].blockNum !== null) {
+                if (cells[patternY][patternX].blockNum === fallingBlockNum) {
+                    subArrOfFields[row][col] = 1;
+                } else {
+                    subArrOfFields[row][col] = 2;
+                }
+            }
+        }
+    }
+    return subArrOfFields;
+}
+
 function rotateRight() {
     fallingBlockKey = this.fallingBlockKey;
     let rotatedBlockState = blocks[fallingBlockKey].pattern;
@@ -338,23 +369,6 @@ function rotateRight() {
     let y = fallingBlockPointMap.values().next().value - blockPointMap.values().next().value;
     let pointInFieldMap = new Map([[x, y]]);
 
-    let subArrOfFields = [[0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]];
-
-    //4*4の配列に壁やほかのブロックなどの障害物の情報を入れていく
-    for (let row = 0; row < PATTERN_ROWS; row++) {
-        for (let col = 0; col < PATTERN_COLS; col++) {
-            //回転対象のブロックを含む4*4の部分配列に
-            //他のブロックや壁外などの情報を詰める
-            if (cells[row][col].blockNum !== undefined) {
-                currentBlockState[row][col] = 1;
-            } else if (col + PATTERN_COLS > COLS) {
-                currentBlockState[row][col] = 2;
-            } else if (row + PATTERN_ROWS > COLS) {
-                currentBlockState[row][col] = 2;
-            }
-        }
-    }
+    let subArrayAroundBlock = packInfoAroundBlock(x, y);
+    console.log();
 }
