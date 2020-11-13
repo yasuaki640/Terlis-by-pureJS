@@ -319,17 +319,16 @@ function searchFallingBlockPoint() {
 
 function rotateRight() {
     fallingBlockKey = this.fallingBlockKey;
-    let fallingBlockPattern = blocks[fallingBlockKey].pattern;
-    let currentBlockState = fallingBlockPattern;
+    let rotatedBlockState = blocks[fallingBlockKey].pattern;
 
     const rotate90degToRight = pattern => pattern[0].map((_, c) => pattern.map(r => r[c]).reverse());
     for (let i = 0; i < blockDirection; i++) {
-        currentBlockState = rotate90degToRight(currentBlockState);
+        rotatedBlockState = rotate90degToRight(rotatedBlockState);
     }
-    let rotated = rotate90degToRight(currentBlockState);
+    let rotated = rotate90degToRight(rotatedBlockState);
 
     //4*4行列の中で最も左上にくるブロックの座標を得る。
-    let blockPointMap = searchBlockPoint(currentBlockState);
+    let blockPointMap = searchBlockPoint(rotatedBlockState);
 
     //落ちているブロック位置を探索する
     let fallingBlockPointMap = searchFallingBlockPoint();
