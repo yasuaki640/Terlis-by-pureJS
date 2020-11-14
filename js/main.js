@@ -292,6 +292,30 @@ function moveLeft() {
     }
 }
 
+function rotateRight() {
+    fallingBlockKey = this.fallingBlockKey;
+    let rotatedBlockState = blocks[fallingBlockKey].pattern;
+
+    const rotate90degToRight = pattern => pattern[0].map((_, c) => pattern.map(r => r[c]).reverse());
+    for (let i = 0; i < blockDirection; i++) {
+        rotatedBlockState = rotate90degToRight(rotatedBlockState);
+    }
+    let rotated = rotate90degToRight(rotatedBlockState);
+
+    //4*4行列の中で最も左上にくるブロックの座標を得る。
+    let blockPointMap = searchBlockPoint(rotatedBlockState);
+
+    //落ちているブロック位置を探索する
+    let fallingBlockPointMap = searchFallingBlockPoint();
+
+    //4*4のマスの(0,0)をフィールド上の座標に変換する。
+    let x = fallingBlockPointMap.keys().next().value - blockPointMap.keys().next().value;
+    let y = fallingBlockPointMap.values().next().value - blockPointMap.values().next().value;
+    let pointInFieldMap = new Map([[x, y]]);
+
+    let subArrayAroundBlock = getInfoAroundBlock(x, y);
+}
+
 function searchBlockPoint(currentState) {
     let blockPoint = new Map();
     for (let row = 0; row < currentState.length; row++) {
@@ -346,29 +370,4 @@ function getInfoAroundBlock(x, y) {
         }
     }
     return subArrOfFields;
-}
-
-function rotateRight() {
-    fallingBlockKey = this.fallingBlockKey;
-    let rotatedBlockState = blocks[fallingBlockKey].pattern;
-
-    const rotate90degToRight = pattern => pattern[0].map((_, c) => pattern.map(r => r[c]).reverse());
-    for (let i = 0; i < blockDirection; i++) {
-        rotatedBlockState = rotate90degToRight(rotatedBlockState);
-    }
-    let rotated = rotate90degToRight(rotatedBlockState);
-
-    //4*4行列の中で最も左上にくるブロックの座標を得る。
-    let blockPointMap = searchBlockPoint(rotatedBlockState);
-
-    //落ちているブロック位置を探索する
-    let fallingBlockPointMap = searchFallingBlockPoint();
-
-    //4*4のマスの(0,0)をフィールド上の座標に変換する。
-    let x = fallingBlockPointMap.keys().next().value - blockPointMap.keys().next().value;
-    let y = fallingBlockPointMap.values().next().value - blockPointMap.values().next().value;
-    let pointInFieldMap = new Map([[x, y]]);
-
-    let subArrayAroundBlock = packInfoAroundBlock(x, y);
-    console.log();
 }
