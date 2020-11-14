@@ -314,60 +314,64 @@ function rotateRight() {
     let pointInFieldMap = new Map([[x, y]]);
 
     let subArrayAroundBlock = getInfoAroundBlock(x, y);
-}
 
-function searchBlockPoint(currentState) {
-    let blockPoint = new Map();
-    for (let row = 0; row < currentState.length; row++) {
-        for (let col = 0; col < currentState[row].length; col++) {
-            if (currentState[row][col] === 1) {
-                blockPoint.set(col, row);
-                return blockPoint;
-            }
-        }
-    }
-}
+    let canRotate = checkCanRotateBlock(subArrayAroundBlock, rotated);
 
-function searchFallingBlockPoint() {
-    let fallingBlockPoint = new Map();
-    for (let row = 0; row < ROWS; row++) {
-        for (let col = 0; col < COLS; col++) {
-            if (cells[row][col].blockNum !== undefined
-                && cells[row][col].blockNum === fallingBlockNum) {
-                fallingBlockPoint.set(col, row);
-                return fallingBlockPoint;
-            }
-        }
-    }
-}
-
-function getInfoAroundBlock(x, y) {
-    let subArrOfFields = [[0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]];
-
-    //4*4の配列に壁やほかのブロックなどの障害物の情報を入れていく
-    for (let row = 0; row < PATTERN_ROWS; row++) {
-        for (let col = 0; col < PATTERN_COLS; col++) {
-            //回転対象のブロックを含む4*4の部分配列に
-            //他のブロックや壁外などの情報を詰める
-            let patternX = col + x;
-            let patternY = row + y;
-            // 1 = 落ちているブロック自身
-            // 2 = すでに積みあがったブロック
-            // 3 = フィールドの範囲外であることを示す
-            if (patternX > COLS - 1 || patternY > ROWS - 1) {
-                subArrOfFields[row][col] = 3;
-            } else if (cells[patternY][patternX].blockNum !== undefined
-                && cells[patternY][patternX].blockNum !== null) {
-                if (cells[patternY][patternX].blockNum === fallingBlockNum) {
-                    subArrOfFields[row][col] = 1;
-                } else {
-                    subArrOfFields[row][col] = 2;
+    function searchBlockPoint(currentState) {
+        let blockPoint = new Map();
+        for (let row = 0; row < currentState.length; row++) {
+            for (let col = 0; col < currentState[row].length; col++) {
+                if (currentState[row][col] === 1) {
+                    blockPoint.set(col, row);
+                    return blockPoint;
                 }
             }
         }
     }
-    return subArrOfFields;
+
+    function searchFallingBlockPoint() {
+        let fallingBlockPoint = new Map();
+        for (let row = 0; row < ROWS; row++) {
+            for (let col = 0; col < COLS; col++) {
+                if (cells[row][col].blockNum !== undefined
+                    && cells[row][col].blockNum === fallingBlockNum) {
+                    fallingBlockPoint.set(col, row);
+                    return fallingBlockPoint;
+                }
+            }
+        }
+    }
+
+    function getInfoAroundBlock(x, y) {
+        let subArrOfFields = [[0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]];
+
+        //4*4の配列に壁やほかのブロックなどの障害物の情報を入れていく
+        for (let row = 0; row < PATTERN_ROWS; row++) {
+            for (let col = 0; col < PATTERN_COLS; col++) {
+                //回転対象のブロックを含む4*4の部分配列に
+                //他のブロックや壁外などの情報を詰める
+                let patternX = col + x;
+                let patternY = row + y;
+                // 1 = 落ちているブロック自身
+                // 2 = すでに積みあがったブロック
+                // 3 = フィールドの範囲外であることを示す
+                if (patternX > COLS - 1 || patternY > ROWS - 1) {
+                    subArrOfFields[row][col] = 3;
+                } else if (cells[patternY][patternX].blockNum !== undefined
+                    && cells[patternY][patternX].blockNum !== null) {
+                    if (cells[patternY][patternX].blockNum === fallingBlockNum) {
+                        subArrOfFields[row][col] = 1;
+                    } else {
+                        subArrOfFields[row][col] = 2;
+                    }
+                }
+            }
+        }
+        return subArrOfFields;
+    }
 }
+
+
