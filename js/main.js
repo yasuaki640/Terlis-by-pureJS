@@ -315,6 +315,19 @@ function rotateRight() {
 
     let subArrayAroundBlock = getInfoAroundBlock(x, y);
 
+    function checkCanRotateBlock(subArrayAroundBlock, rotated) {
+        for (let row = 0; row < PATTERN_ROWS; row++) {
+            for (let col = 0; col < PATTERN_COLS; col++) {
+                if (rotated[row][col] === 1) {
+                    if (subArrayAroundBlock[row][col] === 2 || subArrayAroundBlock[row][col] === 3) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
     let canRotate = checkCanRotateBlock(subArrayAroundBlock, rotated);
 
     function searchBlockPoint(currentState) {
