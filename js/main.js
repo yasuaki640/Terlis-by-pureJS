@@ -317,7 +317,7 @@ function searchFallingBlockPoint() {
     }
 }
 
-function packInfoAroundBlock(x, y) {
+function getInfoAroundBlock(x, y) {
     let subArrOfFields = [[0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
