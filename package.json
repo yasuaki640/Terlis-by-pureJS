@@ -1,0 +1,23 @@
+{
+  "name": "tetris-by-purejs",
+  "version": "1.0.0",
+  "description": "A Tetris game created by pure Javascript",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yasuaki640/Tetlis-by-pureJS.git"
+  },
+  "author": "Yasuaki Watanabe",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/yasuaki640/Tetlis-by-pureJS/issues"
+  },
+  "homepage": "https://github.com/yasuaki640/Tetlis-by-pureJS#readme",
+  "dependencies": {
+    "aws-sdk": "^2.792.0",
+    "chokidar": "^3.4.3"
+  }
+}
