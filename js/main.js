@@ -6,9 +6,6 @@ let isFalling = false;
 let fallingBlockKey;
 let blockDirection = 0;
 const UPWARD = 0;
-const RIGHTWARD = 1;
-const DOWNWARD = 2;
-const LEFTWARD = 3;
 const UPWARD_AFTER_GO_AROUND = 4;
 
 // キーボードイベントを監視する
