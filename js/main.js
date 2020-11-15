@@ -325,6 +325,13 @@ function rotateRight() {
                 if (col > COLS - 1 || row > ROWS - 1) {
                     break;
                 }
+                //回転対象ブロックをいったん初期化
+                if (cells[row][col].blockNum !== undefined
+                    && cells[row][col].blockNum !== null
+                    && cells[row][col].blockNum === fallingBlockNum) {
+                    cells[row][col].className = "";
+                    cells[row][col].blockNum = null;
+                }
     }
 
     function checkCanRotateBlock(subArrayAroundBlock, rotated) {
