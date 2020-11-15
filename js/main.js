@@ -332,6 +332,13 @@ function rotateRight() {
                     cells[row][col].className = "";
                     cells[row][col].blockNum = null;
                 }
+                //ブロックを配置する
+                if (rotatedBlockState[row - y][col - x] === 1) {
+                    cells[row][col].blockNum = fallingBlockNum;
+                    cells[row][col].className = fallingBlockKey;
+                }
+            }
+        }
     }
 
     function checkCanRotateBlock(subArrayAroundBlock, rotated) {
