@@ -315,6 +315,8 @@ function rotateRight() {
 
     let subArrayAroundBlock = getInfoAroundBlock(x, y);
 
+    let canRotate = checkCanRotateBlock(subArrayAroundBlock, rotated);
+
     function checkCanRotateBlock(subArrayAroundBlock, rotated) {
         for (let row = 0; row < PATTERN_ROWS; row++) {
             for (let col = 0; col < PATTERN_COLS; col++) {
@@ -328,7 +330,6 @@ function rotateRight() {
         return true;
     }
 
-    let canRotate = checkCanRotateBlock(subArrayAroundBlock, rotated);
 
     function searchBlockPoint(currentState) {
         let blockPoint = new Map();
