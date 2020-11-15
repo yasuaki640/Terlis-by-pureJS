@@ -325,9 +325,7 @@ function rotateRight() {
                     break;
                 }
                 //回転対象ブロックをいったん初期化
-                if (cells[row][col].blockNum !== undefined
-                    && cells[row][col].blockNum !== null
-                    && cells[row][col].blockNum === fallingBlockNum) {
+                if (cells[row][col].blockNum === fallingBlockNum) {
                     cells[row][col].className = "";
                     cells[row][col].blockNum = null;
                 }
