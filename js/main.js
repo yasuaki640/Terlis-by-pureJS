@@ -315,7 +315,8 @@ function rotateRight() {
 
     let subArrayAroundBlock = getInfoAroundBlock(x, y);
 
-    let canRotate = checkCanRotateBlock(subArrayAroundBlock, rotated);
+    if (checkCanRotateBlock(subArrayAroundBlock, rotatedBlockState)) {
+    }
 
     function checkCanRotateBlock(subArrayAroundBlock, rotated) {
         for (let row = 0; row < PATTERN_ROWS; row++) {
