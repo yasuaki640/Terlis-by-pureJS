@@ -9,6 +9,7 @@ const UPWARD = 0;
 const RIGHTWARD = 1;
 const DOWNWARD = 2;
 const LEFTWARD = 3;
+const UPWARD_AFTER_GO_AROUND = 4;
 
 // キーボードイベントを監視する
 document.addEventListener("keydown", onKeyDown);
@@ -206,6 +207,7 @@ function generateBlock() {
     isFalling = true;
     fallingBlockNum = nextFallingBlockNum;
     this.fallingBlockKey = nextBlockKey;
+    blockDirection = UPWARD;
 }
 
 // キー入力によってそれぞれの関数を呼び出す
@@ -339,6 +341,8 @@ function rotateRight() {
                 }
             }
         }
+        blockDirection++;
+        blockDirection %= UPWARD_AFTER_GO_AROUND;
     }
 
     function checkCanRotateBlock(subArrayAroundBlock, rotated) {
