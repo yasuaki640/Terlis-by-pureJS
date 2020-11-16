@@ -188,15 +188,14 @@ function generateBlock() {
     // ATTENTION kuso code
     for (let row = 1; row < pattern.length - 1; row++) {
         for (let col = 0; col < pattern[row].length; col++) {
-            if (pattern[row][col] === 0) {
-                continue;
+            if (pattern[row][col] === 1) {
+                // 2. 選んだパターンをもとにブロックを配置する
+                cells[row - 1][col + 3].className = nextBlock.class;
+                cells[row - 1][col + 3].blockNum = nextFallingBlockNum;
             } else if (cells[row - 1][col + 3].className !== "") {
                 alert("game over");
                 return;
             }
-            // 2. 選んだパターンをもとにブロックを配置する
-            cells[row - 1][col + 3].className = nextBlock.class;
-            cells[row - 1][col + 3].blockNum = nextFallingBlockNum;
 
         }
     }
