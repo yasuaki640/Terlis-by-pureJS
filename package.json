@@ -15,9 +15,5 @@
   "bugs": {
     "url": "https://github.com/yasuaki640/Tetlis-by-pureJS/issues"
   },
-  "homepage": "https://github.com/yasuaki640/Tetlis-by-pureJS#readme",
-  "dependencies": {
-    "aws-sdk": "^2.792.0",
-    "chokidar": "^3.4.3"
-  }
+  "homepage": "https://github.com/yasuaki640/Tetlis-by-pureJS#readme"
 }
